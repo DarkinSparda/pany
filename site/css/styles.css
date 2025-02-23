@@ -1,0 +1,40 @@
+
+
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+
+/* General styling for all paragraphs */
+
+div {
+    border: 5px solid;
+    position: fixed;
+    width: 25%;
+
+    font-family: 'Roboto', 'Corbel', 'Avenir', 'Lucida Grande', 'Lucida Sans', sans-serif;
+}
+
+#two {
+    top: 5%;
+    right: 5%;
+    border-color: green;
+}
+
+#three {
+    top: 5%;
+    left: 5%;
+    border-color: orange;
+}
+
+#one {
+    border-color: blue;
+    bottom: 5%;
+    right: 5%;
+}
+
+#four {
+    border-color: yellow;
+    bottom: 5%;
+    left: 5%;
+}

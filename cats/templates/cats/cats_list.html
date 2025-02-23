@@ -1,0 +1,22 @@
+{% block content %}
+<meta name="dj4e" content="b1d49d65692f373bd3ae6ed4af9eda30">
+<meta name="dj4e-code" content="42174005923434">
+
+<h1>Cats List</h1>
+{% if breed_count == 0 %}
+There are no cats in the library.
+{% else %}
+<ul>
+    {% for cat in cat_list %}
+    <li>{{ cat.nickname }} ({{ cat.breed.name }})</li>
+    <a href="{% url 'cats:cat_update' cat.id %}">Update</a> |
+    <a href="{% url 'cats:cat_delete' cat.id %}">Delete!</a>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<p><a href="{% url 'cats:breed_list' %}">View breeds</a></p> |
+<a href="{% url 'cats:breed_create' %}">Add a breed</a> |
+<a href="{% url 'cats:cat_create' %}">Add a cat</a>
+
+{% endblock %}

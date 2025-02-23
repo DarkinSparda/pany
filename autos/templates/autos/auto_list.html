@@ -1,0 +1,35 @@
+{% extends "base_bootstrap.html" %}
+<meta name="dj4e" content="b1d49d65692f373bd3ae6ed4af9eda30">
+{% block content %}
+  <h1>Auto List</h1>
+  {% if auto_list %}
+  <ul>
+    {% for auto in auto_list %}
+      <li>
+          {{ auto.nickname }} ({{ auto.make }})
+          (<a href="{% url 'autos:auto_update' auto.id %}">Update</a> |
+          <a href="{% url 'autos:auto_delete' auto.id %}">Delete</a>) <br/>
+          {{ auto.comments }} ({{ auto.mileage }} miles)
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no autos in the library.</p>
+  {% endif %}
+  <p>
+    {% if make_count > 0 %}
+      <a href="{% url 'autos:auto_create' %}">Add an auto</a>
+    {% else %}
+      Please add a make before you add an auto.
+    {% endif %}
+  </p>
+  <p>
+  <a href="{% url 'autos:make_list' %}">View makes</a> ({{ make_count }}) |
+    <a href="{% url 'autos:make_create' %}">Add a make</a>
+    {% if user.is_authenticated %}
+    <a href="{% url 'logout' %}">Log Out!</a>
+    {% else %}
+    <a href="{% url 'login' %}">Log In</a>
+    {% endif %}
+  </p>
+{% endblock %}
