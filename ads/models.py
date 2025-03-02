@@ -15,7 +15,9 @@ class Ad(models.Model):
     comments = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                     through='Comment',
                                     related_name='comments_owned')
-
+    favorites = models.ManyToManyField(settings.AUTH_USER_MODEL,                             
+                                    through='Favorite',
+                                    related_name='favorite_ads')
     #Picture
 
     picture = models.BinaryField(null= True, blank=True, editable=True)
@@ -43,3 +45,13 @@ class Comment(models.Model):
     def __str__(self):
         if len(self.text) < 15: return self.text
         else: return self.text[:11] + '...'
+
+class Favorite(models.Model):
+    ad = models.ForeignKey(Ad, on_delete=models.CASCADE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('ad', 'owner')
+    
+    def __str__(self):
+        return '%s likes %s'%(self.owner.username, self.ad.title[:10])

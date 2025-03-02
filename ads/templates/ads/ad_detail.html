@@ -54,6 +54,7 @@ style="float:right; max-width:50%;">
 {% for comment in comments %}
 <p>{{ comment }}</p>
 <p> By: {{ comment.owner.email }} </p>
+<p> {{ comment.updated_at|naturaltime }}</p>
 {% if comment.owner == user %}
 <a href="{% url 'ads:ad_comment_delete' comment.id %}">Delete</a>
 {% endif %}
