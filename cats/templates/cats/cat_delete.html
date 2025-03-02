@@ -1,0 +1,9 @@
+{% block content %}
+
+<form method="post" action="">
+    {% csrf_token %}
+    <p>Are you sure you want to delete "{{ cat.nickname }}"?</p>
+    <button type='submit'>Yes, delete.</button>
+</form>
+
+{% endblock %}
