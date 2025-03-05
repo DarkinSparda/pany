@@ -10,6 +10,8 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Q
+
 
 
 class AdListView(OwnerListView):
@@ -22,9 +24,18 @@ class AdListView(OwnerListView):
         if request.user.is_authenticated:
             rows = request.user.favorite_ads.values('id')
             favorites = [ row['id'] for row in rows ]
+        # search
+        search_value = request.GET.get('search')
+        # query = query.add
+        if search_value:
+            query = Q(title__icontains=search_value) | Q(text__icontains=search_value)
+            al = al.filter(query)
+            
+        
         ctx = {
             'ad_list': al,
-            'favorites': favorites
+            'favorites': favorites,
+            'search_term': search_value,
         }
         return render(request, self.template, ctx)
         
