@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MinLengthValidator
 from django.conf import settings
+from taggit.managers import TaggableManager
 # Create your models here.
 
 class Ad(models.Model):
@@ -18,6 +19,9 @@ class Ad(models.Model):
     favorites = models.ManyToManyField(settings.AUTH_USER_MODEL,                             
                                     through='Favorite',
                                     related_name='favorite_ads')
+    
+    tags = TaggableManager()
+    
     #Picture
 
     picture = models.BinaryField(null= True, blank=True, editable=True)
